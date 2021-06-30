@@ -76,15 +76,15 @@
 <img src="../../img/OS/3-4.jpg">
 
 * Parent 프로세스가 child 프로세스를 생성할 때 결정되어야 할 내용
-  1. child와 동시에 실행(e.g. bash> background) / child가 끝날 때까지 대기(e.g. bash> foreground)
-  2. child가 parnet의 address-space를 복사(e.g. fork()) / 새로운 프로그램을 로드 (e.g. exec())
+  * child와 동시에 실행(e.g. bash> background) / child가 끝날 때까지 대기(e.g. bash> foreground)
+  * child가 parnet의 address-space를 복사(e.g. fork()) / 새로운 프로그램을 로드 (e.g. exec())
 
 ### - Process Termination
 
 * 프로세스 종료의 원인
-  1. 마지막 statement 실행 완료
-  2. exit() system call로 OS에 요청
-  * 이 외에도 시스템 구성에 따라서 다른 이유로(e.g. 부모가 종료시 자식도 종료) 종료 될 수 있다.
+  * 마지막 statement 실행 완료
+  * exit() system call로 OS에 요청
+  * 시스템 구성에 따라서 다른 이유로(e.g. 부모가 종료시 자식도 종료) 종료 될 수 있다.
 
 * 프로세스가 종료가 되면
   * 대기중인 parent 프로세스에 status value를 리턴
