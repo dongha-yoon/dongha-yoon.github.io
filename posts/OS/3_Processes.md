@@ -84,8 +84,22 @@
 * 프로세스 종료의 원인
   * 마지막 statement 실행 완료
   * exit() system call로 OS에 요청
-  * 시스템 구성에 따라서 다른 이유로(e.g. 부모가 종료시 자식도 종료) 종료 될 수 있다.
-
+  * parent 프로세스가 kill
+    * child가 특정 리소스를 너무 많이 차지 하는 경우
+    * child에 할당된 task가 필요없어진 경우
+    * parent가 종료되는 경우(cascading termination)
+  
 * 프로세스가 종료가 되면
   * 대기중인 parent 프로세스에 status value를 리턴
   * 메모리, open file, I/O buffer 등이 회수됨
+
+<hr>
+
+## 3.4 IPC (InterProcess Communication)
+
+* 일반적으로 프로세스는 고유한 address-space를 가지고 있으며 다른 프로세스가 접근할 수 없다.
+
+* Process cooperation의 이유
+  * Information Sharing : Chrome에서 복사한 내용을 Word에 붙여넣기
+  * Computaion Speedup : 멀티코어 환경에서 task의 빠른 처리를 위해 여러 subtask로 분할
+  * Modularity : System function들을 분리된 프로세스/스레드에서 실행
