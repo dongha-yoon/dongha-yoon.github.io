@@ -2,8 +2,8 @@
 
 # [Chapter 3] Processes
 
-* Process : 실행중인 프로그램. 현대 컴퓨터 시스템에서 작업의 단위를 의미함.
-* Program : 스토리지에 저장된 executable file. 이게 메모리에 로드 되면 하나의 프로세스가 된다고 이해하면 될 것 같다
+* **Process**: 실행중인 프로그램. 현대 컴퓨터 시스템에서 작업의 단위를 의미함.
+* **Program** : 스토리지에 저장된 executable file. 이게 메모리에 로드 되면 하나의 프로세스가 된다고 이해하면 될 것 같다
 
 ## 3.1 Process Concept
 
@@ -21,11 +21,11 @@
 ### - Process State
 
 * 프로세스 상태는 크게 5가지로 구분됨
-  * New : 프로세스가 생성되고 있음
-  * Running : CPU에서 instruction이 실행되고 있음
-  * Wating : 입출력과 같은 특정 이벤트가 일어나기 전까지 대기
-  * Ready : CPU를 할당받기 위해 대기
-  * Terminated : 실행이 끝남
+  * **New** : 프로세스가 생성되고 있음
+  * **Running** : CPU에서 instruction이 실행되고 있음
+  * **Wating** : 입출력과 같은 특정 이벤트가 일어나기 전까지 대기
+  * **Ready** : CPU를 할당받기 위해 대기
+  * **Terminated** : 실행이 끝남
 
 ### - PCB (Process Control Block)
 
@@ -42,8 +42,8 @@
 
 * Multiprogramming의 목적 : CPU utilization(이용률)을 최대한 높이는 것이다.
 * 일반적으로 process를 **I/O-bound Process**와 **CPU-bound Process**로 구분한다
-  * I/O-bound : CPU 연산을 쓰는 시간 보다 입출력에 소모되는 시간이 더 많은 프로세스
-  * CPU-bound : CPU 연산을 쓰는 시간이 더 많은 프로세스
+  * **I/O-bound** : CPU 연산을 쓰는 시간 보다 입출력에 소모되는 시간이 더 많은 프로세스
+  * **CPU-bound** : CPU 연산을 쓰는 시간이 더 많은 프로세스
   * ex) 사용자가 입력을 하는 시간이 초단위인데, CPU는 1초에 20억 클럭을 돌릴 수 있다(2.0GHz 기준). 이러한 입출력에 시간을 소모하는 동안 프로세스가 CPU를 점유하고 있다면 그만큼의 utilization 저하가 일어나고 있다는 뜻!
 
 ### - Context Switch
@@ -100,9 +100,9 @@
 * 일반적으로 프로세스는 고유한 address-space를 가지고 있으며 다른 프로세스가 접근할 수 없다.
 
 * Process cooperation의 이유
-  * Information Sharing : ex) Chrome에서 복사한 내용을 Word에 붙여넣기
-  * Computaion Speedup : 멀티코어 환경에서 task의 빠른 처리를 위해 여러 subtask로 분할
-  * Modularity : System function들을 분리된 프로세스/스레드에서 실행
+  * **Information Sharing** : ex) Chrome에서 복사한 내용을 Word에 붙여넣기
+  * **Computaion Speedup** : 멀티코어 환경에서 task의 빠른 처리를 위해 여러 subtask로 분할
+  * **Modularity** : System function들을 분리된 프로세스/스레드에서 실행
 
 * IPC model
   * **Shared memory** : 말 그대로 특정 메모리 영역을 다른 프로세스와 공유. shared region을 만들 때만 system call을 하므로 context switch overhead가 적다.
@@ -169,17 +169,17 @@
 ### - Synchronization
 
   * Synchronous (blocking) / Asynchronous (nonblocking)
-  1. Blocking send : 메세지를 보낸 후 메세지가 프로세스(또는 mailbox)에 수신이 될 때까지 대기
-  2. Nonblocking send : 메세지를 보내고 하던것 계속 진행(수신 여부 확인 x)
-  3. Blocking receive : 수신할 메세지가 생길 때까지 대기
-  4. Nonblocking receive : 수신할 메세지가 존재하는지, 유효한지를 확인
+  1. **Blocking send** : 메세지를 보낸 후 메세지가 프로세스(또는 mailbox)에 수신이 될 때까지 대기
+  2. **Nonblocking send** : 메세지를 보내고 하던것 계속 진행(수신 여부 확인 x)
+  3. **Blocking receive** : 수신할 메세지가 생길 때까지 대기
+  4. **Nonblocking receive** : 수신할 메세지가 존재하는지, 유효한지를 확인
 
 ### - Buffering
   
   * 보통 메세지를 주고받을 때 임시 저장소인 버퍼가 있어야 한다. 이 때 버퍼의 사이즈에 따른 방식이 구분된다.
-  1. Zero capacity : 버퍼가 없음. 무조건 blocking send가 이루어져야함
-  2. Bounded capacity : 버퍼 크기만큼의 메세지만 있을 수 있다. 버퍼가 비어있다면 nonblocking send가 가능하지만 버퍼가 꽉 찼다면 버퍼에 공간이 생길 때 까지 sending이 block 되어야 한다.
-  3. Unbounded capacity : Sender never blocks.
+  1. **Zero capacity** : 버퍼가 없음. 무조건 blocking send가 이루어져야함
+  2. **Bounded capacity** : 버퍼 크기만큼의 메세지만 있을 수 있다. 버퍼가 비어있다면 nonblocking send가 가능하지만 버퍼가 꽉 찼다면 버퍼에 공간이 생길 때 까지 sending이 block 되어야 한다.
+  3. **Unbounded capacity** : Sender never blocks.
 
 
 
