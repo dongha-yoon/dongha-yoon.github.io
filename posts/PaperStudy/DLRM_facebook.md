@@ -1,6 +1,6 @@
 
 # DLRM (Deep Learning Recommnedation Model)
-#### Ref: https://arxiv.org/abs/1906.00091
+#### Ref: <a>https://arxiv.org/abs/1906.00091</a>
 
 * 이 모델은 personalization, recommendation system을 위한 모델이다.
 * 해당 시스템이 일반적인 딥러닝 시스템과 다른 점은 categorial feature(범주형 변수 <-> 연속형 변수)를 handling 해야한다는 점이다.
@@ -16,8 +16,6 @@
 
 ### 2. View from predictive analytics
 * Predictive analytics : 확률 분류/예측을 위해 statistical model을 이용
-
-<br>
 
 ### - Data processing
 * **Embedding** : 보통 범주형 데이터를 표현하는데 쓰는 Sparse representation(one-hot 또는 multi-hot vector)을 Dense representaion으로 변환
