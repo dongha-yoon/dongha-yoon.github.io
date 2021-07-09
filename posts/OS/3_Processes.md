@@ -112,63 +112,65 @@
 
 ## 3.5 IPC in Shared-Memory Systems
 
-  * 일반적으로는 공유 메모리 영역을 create하는 process의 address space에 존재한다.
-  * 여러 프로세스가 동시에 쓰기를 하면 안되므로 synchronization이 필요.
-  * Application programmer가 명시적으로 구현해야 한다.
+* 일반적으로는 공유 메모리 영역을 create하는 process의 address space에 존재한다.
+* 여러 프로세스가 동시에 쓰기를 하면 안되므로 synchronization이 필요.
+* Application programmer가 명시적으로 구현해야 한다.
 
 ## 3.6 IPC in Message-Passing Systems
 
-  * fixed-sized / variable-sized
-    * fixed : System-level implementation이 간단. 그러나 user-level 프로그래밍이 힘들다
-    * variable : System-level이 복잡하나 user-level은 심플하다
+* fixed-sized / variable-sized
+  * fixed : System-level implementation이 간단. 그러나 user-level 프로그래밍이 힘들다
+  * variable : System-level이 복잡하나 user-level은 심플하다
 
-  * 메제지를 주고 받기 위해서는 프로세스간 **Communication link**가 있어야 한다.
-  * 이 방식의 구현 방법은
-    * **Naming** : Direct / Indirect communication
-    * **Synchronization**: Synchronous / Asynchronous communication
-    * **Buffering** : Automatic / Explicit buffering 으로 구분된다.
+* 메제지를 주고 받기 위해서는 프로세스간 **Communication link**가 있어야 한다.
+* 이 방식의 구현 방법은
+  * **Naming** : Direct / Indirect communication
+  * **Synchronization**: Synchronous / Asynchronous communication
+  * **Buffering** : Automatic / Explicit buffering 으로 구분된다.
 
 ### - Naming
-  * **Direct communication** : 수신/발신 프로세스가 명시됨
-    * send(P, message) : 프로세스 P에 message를 전송
-    * receive(Q, message) : 프로세스 Q로부터 message를 수신
 
-  * Direct communication에서 communication link의 특징
-    * 수신/발신자가 명시되어 있기 때문에 link가 자동적으로 생긴다.
-    * Link는 1:1이다.
-    * 한 쌍의 프로세스 간에는 딱 하나의 link만 있을 수 있다.
+* **Direct communication** : 수신/발신 프로세스가 명시됨
+  * send(P, message) : 프로세스 P에 message를 전송
+  * receive(Q, message) : 프로세스 Q로부터 message를 수신
 
-  * Direct communication의 단점
-    * Limited modularity : Process identifier가 바뀌게 되면 관련 링크를 모두 수정해야함
+* Direct communication에서 communication link의 특징
+  * 수신/발신자가 명시되어 있기 때문에 link가 자동적으로 생긴다.
+  * Link는 1:1이다.
+  * 한 쌍의 프로세스 간에는 딱 하나의 link만 있을 수 있다.
+
+* Direct communication의 단점
+  * Limited modularity : Process identifier가 바뀌게 되면 관련 링크를 모두 수정해야함
 
 <br>
 
-  * **Indirect communication** : 메세지가 *mailbox*를 통해 전달됨
-    * send(A, message) : mailbox A로 message를 전송
-    * receive(A, message) : mailbox A로부터 message를 수신
+* **Indirect communication** : 메세지가 *mailbox*를 통해 전달됨
+  * send(A, message) : mailbox A로 message를 전송
+  * receive(A, message) : mailbox A로부터 message를 수신
 
-  * Inirect communication에서 communication link의 특징
-    * 두 프로세스가 같은 mailbox를 가지고 있어야만 link가 된다.
-    * Link 하나에 여러 프로세스가 관련될 수 있다.
-    * 공유된 mailbox가 여러개라면 한 쌍의 프로세스간에도 여러 링크가 생길 수 있다.
+* Inirect communication에서 communication link의 특징
+  * 두 프로세스가 같은 mailbox를 가지고 있어야만 link가 된다.
+  * Link 하나에 여러 프로세스가 관련될 수 있다.
+  * 공유된 mailbox가 여러개라면 한 쌍의 프로세스간에도 여러 링크가 생길 수 있다.
 
-  * 이러한 특징으로 인해 한 mailbox에 3개 이상의 process가 link되면 의도치 않은 communication이 발생할 수 있다.
-    * 이를 해결하기 위한 방법은
-      * 한 link에 최대 2개의 프로세스만 허용
-      * 한번에 한 프로세스만 receive() operation을 할 수 있게 함
-      * 어떤 프로세스가 receive할지 정함
+* 이러한 특징으로 인해 한 mailbox에 3개 이상의 process가 link되면 의도치 않은 communication이 발생할 수 있다.
+  * 이를 해결하기 위한 방법은
+    * 한 link에 최대 2개의 프로세스만 허용
+    * 한번에 한 프로세스만 receive() operation을 할 수 있게 함
+    * 어떤 프로세스가 receive할지 정함
 
-  * Mailbox의 소유권
-    * 특정 프로세스 / OS system
-    * 소유권이 특정 프로세스에 있다 : 소유자가 receive, 사용자가 send하면 되므로 No confusion!
-    * mailbox가 OS system에 의해 관리된다면 다음과 같은 mailbox manage mechanism을 제공해야함
-      * Mailbox creation
-      * Send / Receive message
-      * Mailbox deletion
+* Mailbox의 소유권
+  * 특정 프로세스 / OS system
+  * 소유권이 특정 프로세스에 있다 : 소유자가 receive, 사용자가 send하면 되므로 No confusion!
+  * mailbox가 OS system에 의해 관리된다면 다음과 같은 mailbox manage mechanism을 제공해야함
+    * Mailbox creation
+    * Send / Receive message
+    * Mailbox deletion
 
 ### - Synchronization
 
-  * Synchronous (blocking) / Asynchronous (nonblocking)
+* Synchronous (blocking) / Asynchronous (nonblocking)
+
   1. **Blocking send** : 메세지를 보낸 후 메세지가 프로세스(또는 mailbox)에 수신이 될 때까지 대기
   2. **Nonblocking send** : 메세지를 보내고 하던것 계속 진행(수신 여부 확인 x)
   3. **Blocking receive** : 수신할 메세지가 생길 때까지 대기
@@ -176,15 +178,15 @@
 
 ### - Buffering
   
-  * 보통 메세지를 주고받을 때 임시 저장소인 버퍼가 있어야 한다. 이 때 버퍼의 사이즈에 따른 방식이 구분된다.
+* 보통 메세지를 주고받을 때 임시 저장소인 버퍼가 있어야 한다. 이 때 버퍼의 사이즈에 따른 방식이 구분된다.
+
   1. **Zero capacity** : 버퍼가 없음. 무조건 blocking send가 이루어져야함
   2. **Bounded capacity** : 버퍼 크기만큼의 메세지만 있을 수 있다. 버퍼가 비어있다면 nonblocking send가 가능하지만 버퍼가 꽉 찼다면 버퍼에 공간이 생길 때 까지 sending이 block 되어야 한다.
   3. **Unbounded capacity** : Sender never blocks.
-
-
 
 <br>
 <hr>
 
 ### Reference
+
 * Operating System Concepts 10th edition

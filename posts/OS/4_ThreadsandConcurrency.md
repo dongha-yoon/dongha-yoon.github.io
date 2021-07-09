@@ -149,6 +149,38 @@
 * Asynchronous는 즉시 종료를 하기 때문에 종료될 thread에 할당된 resource와 다른 thread와 공유중인 data와 관련해서 문제가 생길 수 있다.
 * Deferred에서는 안전하게 resource관련 문제를 다 처리하고 끝낼 수 있다.
 
+### - TLS (Thread-Local Stroage)
+
+* 기본적으로 thread들은 process내의 data segment를 공유하지만 특정 thread만의 독자적인 복사본이 필요한 경우가 있다. 이것을 TLS라고 한다
+* Local variable(stack)은 single fucntion에서만 쓸 수 있지만 TLS는 해당 thread내에서는 global하다.
+* Local variable 보다는 static data와 유사하다고 볼 수 있다.
+
+### - Scheduler Activation
+
+* ***LWP*** (LightWeight Process) : Many-to-many model에서 kernel과 user thread간의 중간 다리 역할을 해주는 데이터구조.
+  * User-thread 관점에서는 LWP가 user thread가 실행될 수 있도록 schedule할 수 있는 virtual processor로 간주된다.
+  * 각 kernel thread에 attatch되어 있으며, OS가 kernel thread를 physical processor에 schedule하면 LWP가 user thread를 실행한다.
+
+* ***Scheduler activation*** : User-thread library와 kernel간의 communication을 위한 방식중 하나.
+  * Kernel이 application에 virtual processors(LWPs)를 할당.
+  * Application이 user thread를 LWP에 schedule.
+  * Upcall : Kernel은 특정 event가 발생하면 application에 알려야 한다. signal과 유사하게 thread library 내의 upcall handler를 통해 LWP내에서 처리를 함.
+
+## 4.7 OS Examples
+
+### - Windows Threads
+
+* One-to-one mapping
+* The general components of a thread:
+  * Thread identifier (tid)
+  * Register set
+  * PC (program counter)
+  * Stack
+  * DLLs (Dynamic linked libraries)
+
+### - Linux Threads
+
+* Window와는 다르게 linux에서는 process와 thread를 구별하지 않고 모두 *task*의 단위로 관리한다.
 
 <br>
 <hr>
