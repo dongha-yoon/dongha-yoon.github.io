@@ -127,10 +127,10 @@
 
 ### - Signal Handling
 
-* ***Signal** : 프로세스에 사전에 정의된 특정 이벤트가 발생하면 kernel에서 알려주는 것을 말한다. Signal이 도달하면 process는 무조건 handling 해야한다.
+* ***Signal*** : 프로세스에 사전에 정의된 특정 이벤트가 발생하면 kernel에서 알려주는 것을 말한다. Signal이 도달하면 process는 무조건 handling 해야한다.
 
-* Synchronous signal : Signal을 일으킨 프로세스와 signal의 destination process가 같다.
-* Asynchronous signal : 다른 프로세스로부터 도달한 signal
+* **Synchronous signal** : Signal을 일으킨 프로세스와 signal의 destination process가 같다.
+* **Asynchronous signal** : 다른 프로세스로부터 도달한 signal
 
 * Multithreaded program에서는 여러 경우의 수가 있어 signal의 처리가 복잡하다.
 
