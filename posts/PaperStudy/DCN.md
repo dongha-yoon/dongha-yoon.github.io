@@ -98,7 +98,7 @@ $$
 $$
 
 * Layer depth를 따라서 cross feature의 차원이 하나씩 증가한다.
-* \# of parameters = $d *L_c* 2$,
+* \# of parameters = $d \times L_c \times 2$,
   * $d$ : input dimension, $L_c$ : \# of cross layers
 
 * Parameter 수가 input dimension의 크기와 linear하기 때문에 cross network전체의 complexity 역시 input dimension에 linear하다.
@@ -115,10 +115,10 @@ $$
 
 * Activation function으로 ReLu를 사용하였다.
   * 기존에 많이 쓰이던 sigmoid 함수는 일정 값을 기준으로 0인지 1인지 구분하므로 binary classification에 적절한데, layer가 많아질수록 gradient가 0으로 수렴하게 되는 gradient vanishing 문제가 생기게 된다.
-  * 이러한 문제를 해결하기 위해 hidden layer에서는 0 이하의 값은 0, 0 이상은 값 그대로(linear) 리턴하는 ReLU 함수를 적용하고, 마지막 output layer에서만 sigmoid를 적용하여 모델의 정확도를 높일 수 있다고 한다.
+  * 이러한 문제를 해결하기 위해 hidden layer에서는 0 이하의 값은 0, 0 이상은 값 그대로 리턴하는 ReLU 함수를 적용하고, 마지막 output layer에서만 sigmoid를 적용하여 모델의 정확도를 높일 수 있다고 한다.
   * <https://medium.com/@kmkgabia/ml-sigmoid-%EB%8C%80%EC%8B%A0-relu-%EC%83%81%ED%99%A9%EC%97%90-%EB%A7%9E%EB%8A%94-%ED%99%9C%EC%84%B1%ED%99%94-%ED%95%A8%EC%88%98-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0-c65f620ad6fd>
 
-* \# of parameters = $d *m + m + (m^2 + m)* (L_d-1)$,
+* \# of parameters = $d \times m + m + (m^2 + m) \times  (L_d-1)$,
   * $d$ : input dimension, $L_d$ : \# of deep layers, $m$ : layer size (assume all layer has equal size)
 
 ### - Combination Layer
@@ -141,10 +141,10 @@ $$
 ### - Generalization to FMs
 
 * FM model : Feature $x_i$는 weight vector $v_i$와 연관되어 있다.
-  * Weght of croess term $x_ix_j = <v_i,v_j>$
+  * Weght of croess term $x_ix_j = \langle v_i,v_j \rangle$
 
-* DCN : $x_i$는 스칼라 $\{w_k^{(i)}\}_{k=0}^l$과 연관되어 있다.
-  * Weght of croess term $x_ix_j = \{w_k^{(i)}\}_{k=0}^l * \{w_k^{(j)}\}_{k=0}^l$
+* DCN : $x_i$는 스칼라 $\lbrace w_k^{(i)}\rbrace_{k=0}^l$과 연관되어 있다.
+  * Weght of croess term $x_ix_j = \lbrace w_k^{(i)}\rbrace_{k=0}^l \times \lbrace w_k^{(j)}\rbrace_{k=0}^l$
 
 * Parameter sharing은 model을 더 효율적이게 할 뿐 아니라 unseen feature interaction을 일반화 하여 모델이 노이즈에 더 강하게 해준다.
 
