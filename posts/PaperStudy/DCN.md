@@ -153,5 +153,29 @@ $$
 
 * DCN은 모든 cross term을 construct할 수 있으며 higher-order FM과는 다르게 파라미터 수가 input dimension에 따라 linear하게 변한다는 장점이 있다.
 
-
 ### - Efficient Projection
+
+## 4. Experimental Results
+
+* Kaggle의 *The Criteo Display ADs* 데이터로 실험을 진행했다.
+  * 이 데이터에 대하여 0.001의 losloss improvement가 상당한 영향을 미친다고 한다.
+
+
+### Implementation Details
+
+* Tensorflow로 작성되었다
+* Data processing and embedding <br>
+: Real-valued feature들은 log transform으로 normalize <br>
+ Categorial feature들은 $ 6 \times (category\ cardinality)^{1/4} $ 차원의 dense vector로 변환 되었다
+* Optimization : Adam optimizat를 사용
+* Regularization : Early stopping을 사용
+  * L2 regularization과 dropout 방식은 효과를 얻을 수가 없었다.
+* Hyperparameters
+
+### Performance
+
+* Cross network의 effect를 입증하기 위해 DNN과의 비교를 중점적으로 분석했다
+  * DNN보다 성능이 더 좋으면서 메모리 소비도 DNN의 40%밖에 되지 않았다
+* 다른 모든 모델에 비해서 우월한 성능을 보여주었다.
+* Cross layer가 많다고 무조건 좋은 성능을 보이진 않았다.
+* Non-CTR dataset에 대해서도 잘 돌아갔다.
