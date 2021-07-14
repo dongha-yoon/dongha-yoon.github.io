@@ -35,30 +35,36 @@
 
 ### - Components
 
-1. Embedding : Embedding table을 이용하여 구한다. sparse vector(e)와 table(W)의 곱으로 dense vector로 변환. 결론적으로는 table의 utilization이 가장 중요.
+* **Embedding** : Embedding table을 이용하여 구한다. sparse vector(e)와 table(W)의 곱으로 dense vector로 변환. 결론적으로는 table의 utilization이 가장 중요.
 
 $$
 w_i^T = e_i^TW
 $$
 
-2. Matrix Factorization
+* **Matrix Factorization**
 
-$$minimize \sum r_{ij}-w_j^Tv_j; w:product, v:user$$
+$$
+minimize \sum r_{ij}-w_j^Tv_j; w:product, v:user
+$$
 
-3. Factorization Machine : Classification
+* **Factorization Machine : Classification**
 
-$$ \hat{y} = b + w^Tx + x^Tupper(VV^T)x $$
+$$
+\hat{y} = b + w^Tx + x^Tupper(VV^T)x
+$$
 
-4. MLP
+* **MLP**
 
-$$ \hat{y} = f_k(f_{k-1}(x))$$
-$$ f_i(x) = W_i\sigma(x)+b_i$$
+$$
+\hat{y} = f_k(f_{k-1}(x))
+$$
+$$
+f_i(x) = W_i\sigma(x)+b_i
+$$
 
-```
-- sigma : activation function
-- W: weight matrix
-- b: bias, threshold와 비슷한 개념. MLP 노드에서 activation이 얼마나 쉽게 일어나게 할 것인가를 결정
-```
+* sigma : activation function
+* W: weight matrix
+* b: bias, threshold와 비슷한 개념. MLP 노드에서 activation이 얼마나 쉽게 일어나게 할 것인가를 결정
 
 ### - DLRM Architecture
 
