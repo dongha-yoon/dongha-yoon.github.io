@@ -17,7 +17,7 @@ autoNumber: "AMS"
 });
 </script>
 
-# DCM (Deep & Cross Network)
+# DCN (Deep & Cross Network)
 
 #### Ref: <https://arxiv.org/abs/1708.05123>
 
