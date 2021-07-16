@@ -137,7 +137,6 @@ $$
 
 * Multivariate polynomial을 polynomial로 reduce 해서 뭐시기뭐시기...
 
-
 ### - Generalization to FMs
 
 * FM model : Feature $x_i$는 weight vector $v_i$와 연관되어 있다.
@@ -153,5 +152,10 @@ $$
 
 * DCN은 모든 cross term을 construct할 수 있으며 higher-order FM과는 다르게 파라미터 수가 input dimension에 따라 linear하게 변한다는 장점이 있다.
 
-
 ### - Efficient Projection
+
+## DLRM과의 비교
+
+* DCN이 기존 모델에 비해 성능이 좋은 이유는 feature crossing을 전담하는 cross network를 만들어 처리를 했기 때문.
+* DLRM이 DCN보다 성능이 높은 이유는 data preprocessing부분에서 matrix factorization을 통해 feature vector들을 일반화 하여 cross term을 second-order 까지만 만들어도 효율적일 수 있도록 하였다.
+이를 통해 DCN에 비해 dimensionality를 크게 줄였다 (linear -> constant)
