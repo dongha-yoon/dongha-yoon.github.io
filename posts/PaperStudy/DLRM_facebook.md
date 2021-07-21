@@ -84,7 +84,7 @@ $$
 
 #### DLRM
 
-* Factorization machine을 통해 top MLP에서 dot product에 의해 생성된 cross-term만 고려하였기 때문에 demensionality를 크게 줄였다.
+* Factorization machine을 통해 top MLP에서 dot product에 의해 생성된 cross-term만 고려하였기 때문에 dimensionality를 크게 줄였다.
 * Key difference : how these network threat embedded feature vectors and their cross-terms
 * DLRM은 각 feature vector를 single category를 표현하는 single unit으로 해석하는 반면, Deep and Cross 같은 네트워크는 각 벡터를 서로간의 cross-term을 생성해야하는 새로운 단위로 취급한다.
 

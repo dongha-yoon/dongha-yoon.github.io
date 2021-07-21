@@ -17,7 +17,7 @@ autoNumber: "AMS"
 });
 </script>
 
-# DCM (Deep & Cross Network)
+# DCN (Deep & Cross Network)
 
 #### Ref: <https://arxiv.org/abs/1708.05123>
 
@@ -137,7 +137,6 @@ $$
 
 * Multivariate polynomial을 polynomial로 reduce 해서 뭐시기뭐시기...
 
-
 ### - Generalization to FMs
 
 * FM model : Feature $x_i$는 weight vector $v_i$와 연관되어 있다.
@@ -179,3 +178,9 @@ $$
 * 다른 모든 모델에 비해서 우월한 성능을 보여주었다.
 * Cross layer가 많다고 무조건 좋은 성능을 보이진 않았다.
 * Non-CTR dataset에 대해서도 잘 돌아갔다.
+
+## DLRM과의 비교
+
+* DCN이 기존 모델에 비해 성능이 좋은 이유는 feature crossing을 전담하는 cross network를 만들어 처리를 했기 때문.
+* DLRM이 DCN보다 성능이 높은 이유는 data preprocessing부분에서 matrix factorization을 통해 feature vector들을 일반화 하여 cross term을 second-order 까지만 만들어도 효율적일 수 있도록 하였다.
+이를 통해 DCN에 비해 dimensionality를 크게 줄였다 (linear -> constant)
