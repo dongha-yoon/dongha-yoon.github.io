@@ -36,7 +36,7 @@
   * CPU registers : 프로세스가 끝나기 전에 CPU를 양보/빼앗기게 될 때 (context switch) 현재 실행중인 정보(register 값)를 저장 해둬야 나중에 다시 이어서 실행을 할 수 가 있게 된다.
   * 이 외에도 CPU-scheduling, Memory-management, Accounting, I/O 관련 정보 등이 있다.
 
-<hr>
+* * *
 
 ## 3.2 Process Scheduling
 
@@ -60,7 +60,7 @@
   * Context switch time을 줄이기
     * 특히 하드웨어와 굉장히 연관이 있는데, CPU 프로세서의 레지스터 셋의 크기가 가장 큰 영향을 미친다. 레지스터 셋이 클수록 PCB를 업데이트 하는데 소모되는 시간이 많다.
 
-<hr>
+* * *
 
 ## 3.3 Operations on Processes
 
@@ -93,7 +93,7 @@
   * 대기중인 parent 프로세스에 status value를 리턴
   * 메모리, open file, I/O buffer 등이 회수됨
 
-<hr>
+* * *
 
 ## 3.4 IPC (InterProcess Communication)
 
@@ -108,7 +108,7 @@
   * **Shared memory** : 말 그대로 특정 메모리 영역을 다른 프로세스와 공유. shared region을 만들 때만 system call을 하므로 context switch overhead가 적다.
   * **Message passing** : system call을 통해 프로세스간 메세지를 교환. 메세지를 보낼 때마다 system call을 하니 overhead가 높겠지?
 
-  <hr>
+  * * *
 
 ## 3.5 IPC in Shared-Memory Systems
 
@@ -185,7 +185,7 @@
   3. **Unbounded capacity** : Sender never blocks.
 
 <br>
-<hr>
+* * *
 
 ### Reference
 

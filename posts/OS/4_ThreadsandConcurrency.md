@@ -25,7 +25,7 @@
 3. **Economy** : 앞에서 언급 했듯이 thread의 creation이 process보다 더 빠르다. 비슷한 의미로 context switch에서도 process-process switch보다 thread-thread switch가 더 빠르다.
 4. **Scalability** : CPU 코어 수가 아무리 많아도 single-threaded 프로세스는 코어 하나에서만 돌아갈 수 있다. multi-threaded 프로세스는 최대로 thread의 수만큼의 코어를 쓸 수도 있다.
 
-<hr>
+* * *
 
 ## 4.2 Multicore Programming
 
@@ -55,7 +55,7 @@
 * ***Task parallelism***
   * Unique operation을 수행하는 여러 task로 나누어 실행한다.
 
-<hr>
+* * *
 
 ## 4.3 Multithreading Models
 
@@ -78,7 +78,7 @@
 * N:M mapping
 * Flexible하다. 문제는 implementation이 매우 어렵다.
 
-<hr>
+* * *
 
 ## 4.5 Implicit Threading
 
@@ -107,7 +107,7 @@
 
 ### - Intel Thread Building Blocks
 
-<hr>
+* * *
 
 ## 4.6 Threading Issues
 
@@ -183,7 +183,7 @@
 * Window와는 다르게 linux에서는 process와 thread를 구별하지 않고 모두 *task*의 단위로 관리한다.
 
 <br>
-<hr>
+* * *
 
 ### Reference
 
