@@ -116,6 +116,82 @@
   * Lower-priority queue로 demote하는 방식
   * 프로세스가 처음 queue에 들어갈 때 어떤 queue에 들어가게 할 것인가
 
+* * *
+
+## 5.4 Thread Scheduling
+
+### Contention Scope
+
+* **PCS**(Process-Contention Scope)
+  * Many-to-one 또는 many-to-many 모델에서는 thread library가 user thread를 가능한 LWP에 schedule한다.
+  * 이와 같은 방식은 CPU를 점유를 위한 경쟁이 같은 프로세스에 속한 thread내에서만 이루어지기 때문이다.
+
+* **SCS**(System-Contention Scope)
+  * Scheduling이 system에 속한 모든 thread 사이에서 이루어지는것.
+  * Kernel thread를 CPU에 schedule하기 위해서 SCS를 이용한다.
+  * One-to-one모델을 쓰는 Windows와 Linux는 SCS만 사용한다.
+
+* * *
+
+## 5.5 Multi-Processor Scheduling
+
+* 앞에서는 대부분의 내용이 single core 기준으로 기술되었는데, 요즘엔 대부분이 multiprocessor system이다.
+  * 멀티코어 CPU, Multithreaded core, NUMA, Heterogeneous multiprocessing
+
+### Approaches
+
+* **Asymmetric multiprocessing**
+  * 한개의 Master server가 모든 scheduling decision, I/O processing 등을 처리하는 것을 의미.
+  * Master만 system data structure에 접근하므로 data sharing이 크게 필요하지가 않다
+  * Master에 bottle neck이 형성되면 시스템 전체의 performance가 저하되는 문제가 있다.
+
+* **Symmetric multiprocessing(SMP)**
+  * 말 그대로 모든 코어가 같은 역할을 수행하는 것을 의미한다.
+
+* Multiprocessor scheduling 방식
+  * **common ready queue** : 모든 프로세서가 하나의 ready queue를 공유하여 scheduling 하는 방법.
+    * 모든 core에서 common data에 접근하기 때문에 locking을 통한 접근 제한이 필요하다(Bottle neck 발생가능성 높음).
+  * **per-core run queues** : 각 프로세서가 private queue를 쓰는 방법.
+    * SMP에서 많이 사용하는 방식.
+    * 프로세스를 스케줄링 할 때 이전에 썼던 CPU에 다시 스케줄한다면 cache hit rate를 향상 시킬 수 있다.(효율적인 cache memory 관리로 성능 향상)
+    * 코어마다 queue가 있기 때문에 load balancing을 잘 해야한다. 코어 하나는 열심히 일하는데 다른 놈이 농땡이 부리고 있으면 전체적인 성능이 저하될 수 밖에 없다.
+
+### Multicore processors
+
+* *Multiprocessor* : CPU 칩 하나에 여러개의 코어가 있는 것을 말하며 OS는 각 코어를 하나의 logical CPU로 인식한다.
+* Memory stall : CPU의 속도가 memory의 속도보다 훨씬 빨라서 생기는 현상
+  * Processor가 data를 필요로 할 때 memory I/O에 소모되는 시간이 CPU 입장에서 너무 오래 걸린다.
+* **Hardware thread**
+  * Memory stall의 문제를 해결하기 위한 방법. Intel CPU에서 hyper-threading과 같은 의미이다.
+  * 각 코어에 2개 이상의 하드웨어 스레드를 만들어 코어가 바꿔가면서 일할 수 있게 한다.
+  * 하드웨어 스레드 하나가 메모리를 기다리고 있으면 코어가 하드웨어 스레드를 바꾸어 진행할 수 있다. 메모리를 기다리는 동안 다른 computation을 수행할 수 있으니 throughput, utilization이 향상된다고 볼 수 있다.
+  * OS는 이 하드웨어 스레드를 하나의 logical CPU로 인식한다.
+  * Coarse-grained와 fine-grained로 구분된다.
+    * **Coarse-grained**  
+      * Memory stall과 같은 long-latency event가 발생할 때만 thread를 switch한다.
+      * Thread를 switch하려면 그 전에 instruction pipeline을 flush를 해주어야 하기 때문에 cost가 높다.
+    * **Fine-grained**
+      * Instruction cycle과 같은 특정 주기마다 thread를 switch한다.
+      * Thread switching을 위한 logic을 포함하고 있어 thread switching의 cost가 작다.
+* Physical core의 cache, pipeline과 같은 resource들은 hardware thread끼리 공유하고 있기 때문에 결과적으로 두 가지 레벨의 scheduling이 필요하다.
+  * 하나는 OS가 software thread를 hardware thread(logical CPU)에 스케줄 하는 것이고,
+  * 다른 하나는 physical core에서 어떤 hardware thread를 schedule할 것인가 이다.
+
+### Load Balancing
+  
+* **Push migration**
+  * Specific task가 주기적으로 프로세서의 load를 확인하여 과로중인 프로세서의 load를 유휴(idle) 또는 덜 바쁜 상태의 프로세서로 옮기는 방식
+* **Pull migradtion**
+  * Idle 프로세서가 busy 프로세서의 wating task를 당겨(pull)오는 방식.
+
+### Processor Affinity
+
+* Caching의 이점을 활용하기 위해 프로세스를 실행됐던 프로세서에 스케줄 하는것을 의미한다.
+* **Soft affinity**
+  * 프로세스를 이전과 같은 프로세서에 할당하려고 시도를 하지만 그것을 보장하지는 않는 방식
+  * Load balancing을 위해 migration이 될 수 있다.(affinity가 깨질 수 있다)
+* **Hard affinity**
+  * 프로세스가 쓸 수 있는 프로세서의 subset을 강제하는 것
 
 * * *
 
