@@ -184,7 +184,6 @@
   2. **Bounded capacity** : 버퍼 크기만큼의 메세지만 있을 수 있다. 버퍼가 비어있다면 nonblocking send가 가능하지만 버퍼가 꽉 찼다면 버퍼에 공간이 생길 때 까지 sending이 block 되어야 한다.
   3. **Unbounded capacity** : Sender never blocks.
 
-<br>
 * * *
 
 ### Reference

@@ -51,7 +51,7 @@
 
 * ***Data parallelism***
   * 데이터 전체를 subset으로 나누어 각 코어에서 똑같은 operation(task)를 실행한다
-  * ex) Array[100000]의 총 합을 구하기 위해서 4개의 코어에 데이터를 0~24999, 25000~49999, 50000~74999, 75000~99999로 나누어 따로 더한후 최종 값을 구한다.
+  * ex) Array[100000]의 총 합을 구하기 위해서 4개의 코어에 데이터를 0-24999, 25000-49999, 50000-74999, 75000-99999로 나누어 따로 더한후 최종 값을 구한다.
 * ***Task parallelism***
   * Unique operation을 수행하는 여러 task로 나누어 실행한다.
 
@@ -134,7 +134,7 @@
 
 * Multithreaded program에서는 여러 경우의 수가 있어 signal의 처리가 복잡하다.
 
-```
+``` 
 1. Signal을 발생시킨 thread에 전달한다.(Synchronous signal)
 2. Signal을 받은 process의 모든 thread에 전달한다.
 3. Signal을 특정한 thread에 전달한다.
@@ -182,7 +182,7 @@
 
 * Window와는 다르게 linux에서는 process와 thread를 구별하지 않고 모두 *task*의 단위로 관리한다.
 
-<br>
+
 * * *
 
 ### Reference
