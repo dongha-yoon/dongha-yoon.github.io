@@ -1,4 +1,5 @@
 # RocksDB
+Ref: https://github.com/facebook/rocksdb/wiki/RocksDB-Overview
 
 ## 1. Overview
 
@@ -90,3 +91,75 @@
 
 ### Avoiding Stalls 
 
+* Stall 발생 조건
+  * Background compaction thread는 memtable(memory) 데이터를 storage file로 flush한다.
+  * 모든 background compaction thread가 compaction을 하고 있는 중에 burst of write가 발생하여 memtable을 빠르게 채운다면 이후의 write가 stall된다.
+* 이 상황을 피하기 위해서 일정 스레드 셋을 memtable flushing을 위해 명시적으로 남겨두도록 RocksDB 설정을 한다.
+
+### Compaction Filter
+
+* Compaction time에 key를 processing해야하는 application이 있을 수 있다.
+  * ex) TTL을 기본적으로 지원하는 DB는 expired key를 제거함
+* Application-defined Compaction-Filter를 설정하면 된다
+
+### ReadOnly Mode
+
+* Readonly mode에서는 lock이 걸리지 않기 때문에 read performance가 많이 향상된다.
+
+### Database Debug Logs
+
+### Data Compression
+
+* 다양한 압축 알고리즘을 지원한다.
+  * lz4, zstd, zlib 등
+
+### Full Backups and Replication
+
+### Support for Multiple Embedded DBs in the same process
+
+* Single server process가 여러개의 RocksDB instance를 동시에 실행할 수 있다
+
+### Block Cache
+
+* RocksDB는 Read 성능을 위해 LRU block cache를 사용한다
+* Block cache는 압축/비압축 block cache로 나누어져 있다.
+
+### Table Cache
+
+* Open file descripter로 구성된 캐시
+* 이 Fd는 sstfile을 위한 것이다.
+
+### I/O Control
+
+* 다양한 I/O 옵션이 있다...
+
+### Stackable DB
+
+* RocksDB는 code DB kernel 위에 레이어로 기능을 추가할 수 있는 built-in wrapper mechanism을 가지고 있다.
+  * ex) TTL 기능을 "StackableDB" API로 구현할 수 있다.
+* RocksDB 코어를 건드리지 않기 때문에 modularized and clean
+
+### **Memtables**
+
+* Pluggable Memtables
+  * Memtable의 default implementation은 'skiplist'
+  * skiplist: sorted set으로, 워크로드가 range-scan으로 write를 interleave할 때 필요함.
+  * 그러나 어떤 app들은 interleaved write 또는 range-scan을 하지 않는다.
+    * 이런 app에서는 sorted set의 performance가 optimal하지가 않다.
+  * Memtable은 세 가지 종류가 있다
+    * skiplist/vector/prefix-hash memtable
+    * vector memtable: bulk-loading에 적합
+      * 모든 write가 vector의 끝에 insert된다.
+      * Flush 될 때 정렬되어서 기록된다
+    * prefix-hash memtable
+      * get,put,scan-within-a-key-prefix를 효율적으로 프로세싱한다.
+
+* Memtable Pipelining
+  * RocksDB는 db의 memtable 수를 임의로 설정할 수 있다.
+  * Memtable이 꽉차게 되면 immutable하게 바뀌며 background thread가 flushing을 시작한다
+  * 그러면서 new write는 새로 할당된 memtable에서 계속 진행된다.
+  * 이러한 flush, allocate pipelining으로 RocksDB의 write throughput이 향상되었다(특히 slow storage device에서)
+
+* Garbage Collection during Memtable Flush
+  * Memtable이 storage로 flush되면 inline-compaction process가 실행된다
+  * Garbage들은 compaction과 같은 방식으로 제거가 된다
