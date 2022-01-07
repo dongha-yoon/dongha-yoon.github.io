@@ -108,4 +108,4 @@
 
 <hr>
 
-### * 무엇보다 기존 programming interface를 intercept하는 방식으로 application programm의 수정 없이 적용할 수 있다는 점이 큰 장점인것 같다
+* 기존 programming interface를 intercept하는 방식으로 application programm의 수정 없이 적용할 수 있다는 점이 큰 장점이다
