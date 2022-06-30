@@ -3,8 +3,8 @@
 ## 1. Challenges on LSM-tree based KV stores
 
 * Write stalls
-  * LSM구조에서 $L_0$레벨은 DRAM에서 flush된 Memtable이 그대로 저장되기 때문에 정렬이 되어 있지 않다.
-  * Compaction은 merge sort 방식으로 하는데, $L_0$이 정렬된 상태가 아니기 때문에 여기서 오는 overheadr가 크다.
+  * LSM구조에서 L0레벨은 DRAM에서 flush된 Memtable이 그대로 저장되기 때문에 정렬이 되어 있지 않다.
+  * Compaction은 merge sort 방식으로 하는데, L0이 정렬된 상태가 아니기 때문에 여기서 오는 overheadr가 크다.
 * Write amplification
   * WA = n*AF (n: # of levels, AF: Amplification factor)
   
