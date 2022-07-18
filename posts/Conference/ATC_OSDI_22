@@ -1,0 +1,193 @@
+# 7/11
+
+## KEY NOTE: Surprize-Inspired Networking
+
+- what will be surplus?
+  - Edge capacity
+  - High resolution sensors
+- how will future apps be different?
+  - they will be proactive
+    - E2C (Edge-to-Cloud)
+
+## [ATC] ZNSwap: un-Block your Swap
+
+- Motivation
+  - Swap on traditional SSDs
+    - certain performance anomalies
+- Flash SSDs
+- ZNSwap : new sw33ap subsystem for ZNS
+
+## [OSDI] BlockFlex
+
+- HarvestVMs: Promising for Improved Resource Utilizaion
+- Storage harvesting is challenging
+  - Insufficient virtualizaition support
+  - Data security concern
+  - Storage performance interference
+- Software-defined flash
+
+## [OSDI] MemLiner2
+
+- Observations
+  - App and GC are just temporally unaligned
+  - Changing object access order in GC is possible
+
+    2
+
+## [OSDI] Carbink: Fault torlerant far Memory
+
+- Memory provisioning is hard, as memory is limited by server physical memory
+- Replication vs Erasure Coding(EC)
+
+## [OSDI] D****emystifying and Checking Silent Semantic Violations in Large Distributed Systems****
+
+## [OSDI] RESIN
+
+## [ATC] Sift
+
+- Bugs on distributed systems
+- The power of refinement
+  - Concise specification
+  - Scaling to complex systems
+  - Dealing with undeciability
+
+## [OSDI] ListDB
+
+- DRAM+PM Hybrid index/KV-store
+- Challenges to avoid write stalls
+  - DRAM-PM latency gap
+  - WA
+  - PM is more sensitive to NUMA effects than DRAM
+- NUMA-aware braided skiplist
+
+## [OSDI] Odinfs
+
+- Design goal
+  - Maximize PM performance
+  - Maintain…
+- Key
+  - Decouple PM access from app threads
+  - Fixed number of delegation threads limit concurrent access
+  - Delagation threads always perform localized PM access
+  - Utilize aggregated bandwidth
+
+## [OSDI] Durinn
+
+- Durable linearizability bugs
+
+## [ATC] Email Delivery in the 21st Century
+
+## [ATC] AddrMiner
+
+# 7/12
+
+## [Keynote] Truthworthy Open Source: The Consequences of Success
+
+- Security problems
+- free, but ‘as is’
+
+### Curation: Adding a layer of accountability
+
+- Two roles :Distribution vs Accountability
+  - Distribution: maximize availability of AS IS sw
+  - Accountablility: supported, more secure versions, perhaps for a fee
+- Open source with “Support”
+  - Focus on fixing vulnerabilites, not just findingtthem
+
+## [OSDI] Trinity
+
+- mobile emulator is more than a traditional VM
+- Graphics processing is the key in mobile emulator
+- Prev work
+  - RPC
+  - Async driver commands
+  - Breaking virtualization
+- Goal
+  - mobile emulator with high efficiency and compatibility
+  -
+- Graphics projection
+- Elasic flow control
+- Adaptive data teleporting
+
+## [OSDI] ORION
+
+- Optimize serverless DAG execution
+
+    -
+
+## [OSDI] XRP: In-Kernel Storage Functions with eBPF
+
+- Kernel SW is becomeing the bottleneck for storage
+- Bypass kernel to eliminate overhead
+- Kernel bypass
+  - pros
+    - No storage stack overhead
+  - cons
+- XRP: A framework for in-kernel storage functions
+
+## [OSDI] TriCache
+
+-
+
+## [ATC] Memory Harvesting in Multi-GPU Systems with Hierarchical Unified Virtual Memory
+
+## [OSDI] Verifying the DaisyNFS concurrent and crash-safe filesystem
+
+- Challenges in veritying FS
+  - Crashes
+  - Concurrency
+- DaisyFS: FS code implemented with transactions
+
+## [OSDI] Fast, Automated Inference of Inductive Invariants for Verifying Distributed Protocols
+
+- When accessing app(VM client) data, hypervisor have full previlege.
+- But hypervisor is vurnelable
+
+## [ATC] IPLFS
+
+## [ATC[ Vigil-KV
+
+## [ATC] Pacman
+
+- Problem
+  - High-latency index traversal
+  - Extra persistence work
+  - Excessive small random accesses
+- Design
+  - Traverse index with shortcut
+  - Redesign comapction pipeline
+  - Separate hot-cold data
+  - Reduce excessive PM accesses
+
+# 7/13
+
+## [Keynote] The Computer and Information Science and Engineering Landscape: A Look Forward
+
+## [OSDI] KSplit
+
+- Driver vulerabilites
+- Driver isolation architecture
+- Challenge
+  - Complex data exchange / structures
+  - Low-level Kernel/C idioms
+  - Concurrency primitives
+- Goals
+  - Isolate the complete driver
+  - Identify
+    - shared/private data
+    - . . .
+
+## [ATC] FlatFS: Flatten Hierarchical FS Namespace on NVMs
+
+- Motivation
+  - Expensive namespace tree traversal
+    - Traversing tree causes…
+      - indirect memory access
+      - random memory access
+
+## [ATC] StRAID
+
+## [ATC] Vinter
+
+- Crash consistency
+  - goal: recover semantically correct state
