@@ -2,9 +2,8 @@
 
 ## 1. Motivations
 
-* Compaction problems in LSM-based KV stores with ZNS SSD
+* Problems from compaction in LSM-based KV stores with ZNS SSD
   * Space amplification (Long-lived SSTs)
-    * 
   * Write amplification (Short-lived SSTs)
 
 
